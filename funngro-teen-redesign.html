@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funngro Teenlancer – Earn Your First Income</title>
+<meta name="description" content="Join 50 lakh teens earning real money with real companies on Funngro. Real projects, real income, real certificates. As seen on Shark Tank India.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #00D084;
+  --green-light: #00F098;
+  --green-dim: rgba(0,208,132,0.10);
+  --green-border: rgba(0,208,132,0.18);
+  --bg: #050F0A;
+  --bg2: #081209;
+  --surface: #0C1A10;
+  --card: #0F1E14;
+  --border: #172218;
+  --border2: #1E2E22;
+  --text: #E8F5ED;
+  --muted: #6B8A72;
+  --muted2: #4A6452;
+  --white: #FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* TICKER */
+.ticker-wrap { background: var(--green); overflow: hidden; padding: 10px 0; white-space: nowrap; }
+.ticker-track { display: inline-flex; animation: ticker 40s linear infinite; }
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #000; padding: 0 28px; letter-spacing: 0.2px; }
+.ticker-dot { width: 5px; height: 5px; background: rgba(0,0,0,0.3); border-radius: 50%; flex-shrink: 0; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* NAV */
+nav {
+  position: fixed; top: 36px; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 64px;
+  background: rgba(5,15,10,0.88); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border); transition: top 0.3s;
+}
+nav.scrolled { top: 0; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { height: 30px; }
+.nav-logo-fallback { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--green); }
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--green) !important; color: #000 !important; padding: 9px 20px !important; border-radius: 100px; font-weight: 700 !important; font-size: 13px !important; }
+.nav-cta:hover { opacity: 0.88; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding: 160px 5% 100px;
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  align-items: center; gap: 60px;
+  position: relative; overflow: hidden;
+}
+.hero-glow { position: absolute; top: -150px; right: -150px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,208,132,0.10) 0%, transparent 65%); pointer-events: none; }
+.hero-glow2 { position: absolute; bottom: -200px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,208,132,0.05) 0%, transparent 65%); pointer-events: none; }
+
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid var(--green-border); padding: 7px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; color: var(--green); margin-bottom: 28px; letter-spacing: 0.3px; }
+.badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: gpulse 2s infinite; }
+@keyframes gpulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,208,132,0.4);} 50%{box-shadow:0 0 0 5px rgba(0,208,132,0);} }
+
+.hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(48px, 5.5vw, 80px); font-weight: 800; line-height: 0.97; letter-spacing: -2.5px; margin-bottom: 24px; color: var(--white); }
+.hero h1 .green { color: var(--green); display: block; }
+.hero-sub { font-size: 17px; color: var(--muted); max-width: 500px; line-height: 1.75; margin-bottom: 40px; font-weight: 300; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.btn-primary { background: var(--green); color: #000; padding: 13px 28px; border-radius: 100px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s; letter-spacing: -0.2px; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,208,132,0.28); }
+.btn-ghost { color: var(--text); padding: 13px 22px; border-radius: 100px; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border2); transition: border-color 0.2s, background 0.2s; font-weight: 500; }
+.btn-ghost:hover { border-color: var(--muted2); background: var(--surface); }
+
+.hero-visual { position: relative; }
+.hero-cards { position: relative; width: 360px; height: 440px; margin: 0 auto; }
+.h-card { position: absolute; background: var(--card); border: 1px solid var(--border2); border-radius: 20px; padding: 20px 22px; animation: floatUp 4s ease-in-out infinite; }
+.h-card:nth-child(1) { top: 0; left: 0; width: 220px; animation-delay: 0s; }
+.h-card:nth-child(2) { top: 90px; right: 0; width: 195px; animation-delay: 1.3s; }
+.h-card:nth-child(3) { bottom: 10px; left: 30px; width: 250px; animation-delay: 0.7s; }
+@keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.hc-icon { width: 38px; height: 38px; background: var(--green-dim); border: 1px solid var(--green-border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; }
+.hc-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 3px; }
+.hc-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1.1; }
+.hc-val.green { color: var(--green); }
+.hc-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+/* STATS */
+.stats-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 44px 5%; }
+.stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 860px; margin: 0 auto; text-align: center; }
+.stat-n { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: var(--green); letter-spacing: -2px; line-height: 1; }
+.stat-l { font-size: 13px; color: var(--muted); margin-top: 6px; font-weight: 400; }
+
+/* SHARED */
+section { padding: 100px 5%; }
+.s-tag { font-size: 11px; color: var(--green); text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; margin-bottom: 14px; }
+.s-title { font-family: 'Syne', sans-serif; font-size: clamp(30px, 3.2vw, 46px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.08; margin-bottom: 14px; color: var(--white); }
+.s-sub { font-size: 16px; color: var(--muted); max-width: 500px; line-height: 1.75; font-weight: 300; }
+
+/* WHY */
+.why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.why-card { background: var(--card); border: 1px solid var(--border2); border-radius: 16px; padding: 24px; transition: border-color 0.25s, transform 0.25s; }
+.why-card:hover { border-color: var(--green-border); transform: translateY(-3px); }
+.wc-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.why-card h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 7px; color: var(--white); letter-spacing: -0.3px; }
+.why-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* CATEGORIES */
+.cats-bg { background: var(--surface); }
+.cats-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 20px; }
+.cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+.cat-card { background: var(--card); border: 1px solid var(--border2); border-radius: 16px; padding: 26px 20px; transition: all 0.25s; cursor: pointer; position: relative; overflow: hidden; }
+.cat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--green); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+.cat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.cat-card:hover::after { transform: scaleX(1); }
+.cat-icon { font-size: 30px; margin-bottom: 12px; display: block; }
+.cat-n { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 5px; color: var(--white); }
+.cat-d { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.cat-arr { position: absolute; top: 18px; right: 18px; color: var(--green); font-size: 16px; opacity: 0; transition: opacity 0.2s, transform 0.2s; transform: translate(-4px, 4px); }
+.cat-card:hover .cat-arr { opacity: 1; transform: translate(0,0); }
+
+/* HOW IT WORKS */
+.how-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+.steps-list { display: flex; flex-direction: column; }
+.step { display: flex; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+.step:last-child { border-bottom: none; }
+.step-n { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 800; color: var(--green); background: var(--green-dim); border: 1px solid var(--green-border); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.step h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 5px; color: var(--white); }
+.step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.earn-card { background: var(--card); border: 1px solid var(--border2); border-radius: 22px; padding: 32px; position: relative; overflow: hidden; }
+.earn-card::before { content: ''; position: absolute; top: -120px; right: -120px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(0,208,132,0.07) 0%, transparent 65%); pointer-events: none; }
+.earn-shark { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid var(--green-border); padding: 8px 16px; border-radius: 100px; font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 20px; }
+.earn-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 6px; }
+.earn-big { font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800; color: var(--green); letter-spacing: -2px; line-height: 1; margin-bottom: 3px; }
+.earn-meta { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.earn-rows { display: flex; flex-direction: column; gap: 10px; }
+.earn-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+.er-l { font-size: 13px; color: #9ab5a0; }
+.er-v { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+
+/* TRUSTED BY */
+.trust-bg { background: var(--surface); }
+.trust-row-label { font-size: 11px; color: var(--muted2); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 14px; margin-top: 28px; }
+.logos-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 20px 24px; background: var(--card); border: 1px solid var(--border2); border-radius: 14px; }
+.logos-row img { height: 26px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.5); transition: opacity 0.2s, filter 0.2s; }
+.logos-row img:hover { filter: brightness(0) invert(1) opacity(0.85); }
+
+/* TESTIMONIALS */
+.testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 52px; }
+.testi-card { background: var(--card); border: 1px solid var(--border2); border-radius: 18px; padding: 28px; transition: border-color 0.25s, transform 0.25s; position: relative; }
+.testi-card:hover { border-color: var(--green-border); transform: translateY(-3px); }
+.testi-card::before { content: '"'; font-family: 'Syne', sans-serif; font-size: 72px; color: rgba(0,208,132,0.07); position: absolute; top: 10px; right: 20px; line-height: 1; pointer-events: none; }
+.testi-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border: 2px solid var(--green-border); }
+.testi-text { font-size: 14px; color: #b0ccb8; line-height: 1.75; margin-bottom: 18px; font-style: italic; font-weight: 300; }
+.testi-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); letter-spacing: -0.2px; }
+.testi-role { font-size: 12px; color: var(--green); margin-top: 2px; font-weight: 500; }
+.stars { color: var(--green); font-size: 13px; margin-bottom: 12px; letter-spacing: 1px; }
+
+/* ABOUT / FOUNDERS */
+.about-bg { background: var(--surface); }
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-text p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+.about-mission { background: var(--green-dim); border: 1px solid var(--green-border); border-radius: 12px; padding: 18px 22px; font-size: 14px; color: var(--green); font-weight: 600; font-style: italic; margin-top: 24px; line-height: 1.6; }
+.founders { display: flex; flex-direction: column; gap: 16px; }
+.founder-card { display: flex; gap: 18px; align-items: center; background: var(--card); border: 1px solid var(--border2); border-radius: 16px; padding: 22px 24px; transition: border-color 0.25s, transform 0.25s; }
+.founder-card:hover { border-color: var(--green-border); transform: translateX(4px); }
+.founder-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--green-dim); border: 2px solid var(--green-border); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.founder-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--white); letter-spacing: -0.3px; }
+.founder-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.founder-li { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--green); font-weight: 600; text-decoration: none; border: 1px solid var(--green-border); padding: 4px 12px; border-radius: 100px; transition: opacity 0.2s; }
+.founder-li:hover { opacity: 0.75; }
+
+/* FAQ */
+.faq-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+.faq-list { display: flex; flex-direction: column; margin-top: 40px; }
+.faq-item { border-bottom: 1px solid var(--border); overflow: hidden; }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; cursor: pointer; gap: 16px; }
+.faq-q-text { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); letter-spacing: -0.2px; }
+.faq-icon { width: 28px; height: 28px; flex-shrink: 0; border: 1px solid var(--border2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 18px; transition: transform 0.25s, background 0.25s; font-family: monospace; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--green-dim); }
+.faq-a { font-size: 14px; color: var(--muted); line-height: 1.75; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s; font-weight: 300; }
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+.faq-right { padding-top: 40px; }
+.faq-cta-card { background: var(--card); border: 1px solid var(--border2); border-radius: 22px; padding: 36px; text-align: center; position: relative; overflow: hidden; }
+.faq-cta-card::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,208,132,0.07) 0%, transparent 65%); pointer-events: none; }
+.faq-cta-card h3 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 10px; }
+.faq-cta-card p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+
+/* CTA */
+.cta-sec { text-align: center; position: relative; overflow: hidden; }
+.cta-sec::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,208,132,0.07) 0%, transparent 65%); pointer-events: none; }
+.cta-sec h2 { font-family: 'Syne', sans-serif; font-size: clamp(38px, 5vw, 68px); font-weight: 800; letter-spacing: -2.5px; line-height: 1.0; margin-bottom: 18px; color: var(--white); }
+.cta-sec p { color: var(--muted); font-size: 17px; margin-bottom: 40px; font-weight: 300; }
+.dl-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.dl-btn { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border2); padding: 13px 20px; border-radius: 12px; text-decoration: none; color: var(--white); transition: border-color 0.2s, transform 0.2s; }
+.dl-btn:hover { border-color: var(--green-border); transform: translateY(-2px); }
+.dl-btn img { height: 28px; object-fit: contain; }
+.dl-small { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.dl-big { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+
+/* FOOTER */
+footer { background: #030A06; border-top: 1px solid var(--border); padding: 52px 5% 36px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+.footer-brand p { font-size: 13px; color: var(--muted); max-width: 280px; margin-top: 10px; line-height: 1.6; }
+.footer-logo-text { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); }
+.footer-col h4 { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted2); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border); padding-top: 24px; }
+.footer-copy { font-size: 12px; color: var(--muted2); }
+.footer-social { display: flex; gap: 16px; }
+.footer-social a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--text); }
+
+/* FADE IN */
+.fi { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fi.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding-top: 110px; }
+  .hero-cards { display: none; }
+  .why-layout, .how-layout, .about-layout, .faq-layout { grid-template-columns: 1fr; gap: 48px; }
+  .cats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .testi-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 480px) {
+  .cats-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>Asmit created 5 reels for TheGreenFuels and earned ₹1,000</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Raunit built a website for Krafthub and earned ₹7,500</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Praanjal completed 10 projects in 3 months and earned ₹15,000</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Tanay wrote an outstanding blog and earned ₹5,000</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Sama created an animated video and earned ₹2,500 in 5 days</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Tanul became a Nano influencer and earned ₹3,000 this month</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Seeran completed a fashion blog and earned ₹250</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Asmit created 5 reels for TheGreenFuels and earned ₹1,000</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Raunit built a website for Krafthub and earned ₹7,500</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Praanjal completed 10 projects in 3 months and earned ₹15,000</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Tanay wrote an outstanding blog and earned ₹5,000</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Sama created an animated video and earned ₹2,500 in 5 days</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Tanul became a Nano influencer and earned ₹3,000 this month</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Seeran completed a fashion blog and earned ₹250</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/638c80735fd2fd0810a24fba_funngro-logo.svg" alt="Funngro" id="nav-img">
+    <span class="nav-logo-fallback" id="nav-fallback" style="display:none">funngro</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">Why Work?</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#faq">FAQs</a></li>
+    <li><a href="https://refer.funngro.com/refer/LM0SCU" class="nav-cta">Earn Now →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="fi">
+    <div class="badge"><span class="badge-dot"></span>As seen on Shark Tank India</div>
+    <h1>Work. Earn.<br><span class="green">Grow.</span></h1>
+    <p class="hero-sub">Real companies. Real projects. Real money — all before you turn 18. Join 50 lakh teens already building their careers on Funngro.</p>
+    <div class="hero-actions">
+      <a href="https://refer.funngro.com/refer/LM0SCU" class="btn-primary">Start Earning Free →</a>
+      <a href="#how" class="btn-ghost">See how it works ↓</a>
+    </div>
+  </div>
+  <div class="hero-visual fi">
+    <div class="hero-cards">
+      <div class="h-card">
+        <div class="hc-icon">💸</div>
+        <div class="hc-label">Latest payout</div>
+        <div class="hc-val green">₹7,500</div>
+        <div class="hc-sub">Website project · Raunit</div>
+      </div>
+      <div class="h-card">
+        <div class="hc-icon">🏢</div>
+        <div class="hc-label">Companies hiring</div>
+        <div class="hc-val">4,000+</div>
+        <div class="hc-sub">Live right now</div>
+      </div>
+      <div class="h-card">
+        <div class="hc-icon">📜</div>
+        <div class="hc-label">You receive</div>
+        <div class="hc-val">Certificate</div>
+        <div class="hc-sub">Every project completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="fi"><div class="stat-n">50L+</div><div class="stat-l">Teenlancers</div></div>
+    <div class="fi"><div class="stat-n">4,000+</div><div class="stat-l">Partner Companies</div></div>
+    <div class="fi"><div class="stat-n">1,000+</div><div class="stat-l">Live Projects</div></div>
+    <div class="fi"><div class="stat-n">12</div><div class="stat-l">Skill Categories</div></div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section id="why">
+  <div class="why-layout">
+    <div class="fi">
+      <div class="s-tag">Why start now</div>
+      <h2 class="s-title">Warren Buffet started at 13.<br>What's your excuse?</h2>
+      <p class="s-sub">Teens who start building real work experience now don't just have better CVs — they think differently and earn independently before college even starts.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fi"><span class="wc-icon">💰</span><h3>First Income</h3><p>Work with real companies and earn actual money, not fake points or gift vouchers.</p></div>
+      <div class="why-card fi"><span class="wc-icon">🔥</span><h3>Find Your Passion</h3><p>Try different fields before committing to a career you might regret.</p></div>
+      <div class="why-card fi"><span class="wc-icon">🧠</span><h3>Real Learning</h3><p>One real project teaches more than an entire semester of theory class.</p></div>
+      <div class="why-card fi"><span class="wc-icon">📜</span><h3>Certificates</h3><p>Build a verified portfolio that impresses colleges and future employers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories" class="cats-bg">
+  <div class="cats-head fi">
+    <div>
+      <div class="s-tag">Explore work</div>
+      <h2 class="s-title">12 ways to get paid</h2>
+    </div>
+    <p class="s-sub" style="max-width:280px; font-size:15px;">Pick your skill. Hundreds of live projects in every category.</p>
+  </div>
+  <div class="cats-grid">
+    <div class="cat-card fi"><span class="cat-icon">📱</span><div class="cat-n">Social Media</div><div class="cat-d">Manage pages, run campaigns for real brands</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🎬</span><div class="cat-n">Video Creation</div><div class="cat-d">Edit and produce videos for companies</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🌐</span><div class="cat-n">Website Design</div><div class="cat-d">Design and build websites from scratch</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🤳</span><div class="cat-n">Influencer Marketing</div><div class="cat-d">Create reels, memes and posts for social handles</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">📲</span><div class="cat-n">App Development</div><div class="cat-d">Build market-ready mobile apps</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🎓</span><div class="cat-n">Campus Ambassador</div><div class="cat-d">Drive sales by acquiring customers on campus</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">📊</span><div class="cat-n">Research & Survey</div><div class="cat-d">Run surveys and complete research assignments</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🗄️</span><div class="cat-n">Data Entry</div><div class="cat-d">Create databases using your data research skills</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🎙️</span><div class="cat-n">Voice Over</div><div class="cat-d">Record content using your voice skills</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">✍️</span><div class="cat-n">Content Writing</div><div class="cat-d">Blogs, articles, website content for companies</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🎨</span><div class="cat-n">Graphic Design</div><div class="cat-d">Logos, brochures, pamphlets, social posts</div><div class="cat-arr">↗</div></div>
+    <div class="cat-card fi"><span class="cat-icon">🧪</span><div class="cat-n">Testing</div><div class="cat-d">Test apps, websites and physical products</div><div class="cat-arr">↗</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="fi">
+    <div class="s-tag">Process</div>
+    <h2 class="s-title">From signup to salary<br>in 5 simple steps</h2>
+  </div>
+  <div class="how-layout">
+    <div class="steps-list">
+      <div class="step fi"><div class="step-n">01</div><div><h3>Register on the App</h3><p>Download Funngro, register, and select your area of interest. Takes under 2 minutes.</p></div></div>
+      <div class="step fi"><div class="step-n">02</div><div><h3>Complete Your Profile</h3><p>Add your skills, interests, and past work to stand out to companies.</p></div></div>
+      <div class="step fi"><div class="step-n">03</div><div><h3>Finish First Project</h3><p>Complete one starter project to prove your skills and get verified on the platform.</p></div></div>
+      <div class="step fi"><div class="step-n">04</div><div><h3>Apply to Companies</h3><p>Browse 1,000+ live projects from 4,000+ companies and start applying immediately.</p></div></div>
+      <div class="step fi"><div class="step-n">05</div><div><h3>Earn + Get Certified</h3><p>Complete projects, earn money, and collect verified experience certificates.</p></div></div>
+    </div>
+    <div class="earn-card fi">
+      <div class="earn-shark">🦈 Featured on Shark Tank India</div>
+      <div class="earn-label">Potential Monthly Earnings</div>
+      <div class="earn-big">₹8,000</div>
+      <div class="earn-meta">Average active teenlancer income / month</div>
+      <div class="earn-rows">
+        <div class="earn-row"><span class="er-l">🎨 Graphic Design project</span><span class="er-v">₹500–₹2,000</span></div>
+        <div class="earn-row"><span class="er-l">✍️ Content writing article</span><span class="er-v">₹200–₹800</span></div>
+        <div class="earn-row"><span class="er-l">📱 Social media management</span><span class="er-v">₹1,000–₹3,000</span></div>
+        <div class="earn-row"><span class="er-l">🌐 Website design (2-page)</span><span class="er-v">₹1,500–₹5,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="trust-bg">
+  <div class="fi">
+    <div class="s-tag">Trusted by</div>
+    <h2 class="s-title">The brands you know<br>are already hiring teens</h2>
+  </div>
+  <div class="trust-row-label fi">Partner Companies</div>
+  <div class="logos-row fi">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e0e2e5824e05e043b_CarDekho%20logo.png" alt="CarDekho">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e236fced422c7e558_StockPe%20Logo.png" alt="StockPe">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909fc56174a8505b2556_Enerzy%20Solar%20logo.png" alt="Enerzy Solar">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c231131a1e105d55f450_Mobigic%20logo.png" alt="Mobigic">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909f302d2432498d0a93_Tarakki%20logo.png" alt="Tarakki">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909fd142ea4d0d188166_LegacyNext%20logo.png" alt="LegacyNext">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e0e05723157cb10f6_Eco%20365%20Logo.png" alt="Eco 365">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e0ce0a8ef5285a045_MOnech%20logo.png" alt="Monech">
+  </div>
+  <div class="trust-row-label fi">Partners</div>
+  <div class="logos-row fi">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c1974420c03b964d4513_AIC%20Pinnacle%20logo.png" alt="AIC Pinnacle">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c1985da398a524766945_Qapita%20logo.png" alt="Qapita">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c197453e183c74317857_Headstart%20logo.png" alt="Headstart">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c1984af86db14b5e888c_AIC%20logo.png" alt="AIC">
+  </div>
+  <div class="trust-row-label fi">Featured In</div>
+  <div class="logos-row fi">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a02a16a363596ec9c5eefb_Times%20of%20India%20logo.png" alt="Times of India">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c778e6c4c837fc2ef89c_Business%20News%20week%20new%20logo.png" alt="Business News Week">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c778a3f4b8074b9bf839_IBS%20Intelligence%20new%20logo.png" alt="IBS Intelligence">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a029286e97ee36926d7bbf_Entracker.png" alt="Entrackr">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c7787f63ad6273e07ba9_The%20Daily%20Brunch%20new%20logo.png" alt="The Daily Brunch">
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="fi">
+    <div class="s-tag">Real stories</div>
+    <h2 class="s-title">50 lakh teens.<br>One platform.</h2>
+    <p class="s-sub">Hear from teenlancers whose lives changed after their first project.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fi">
+      <div class="stars">★★★★★</div>
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a02c38d532a827f92564c4_Aanya%20Anand.png" alt="Aanya Anand" class="testi-avatar" onerror="this.style.display='none'">
+      <p class="testi-text">The experience helped me gain a lot of confidence. Best part is learning and earning together — I never thought I'd be making real money at my age.</p>
+      <div class="testi-name">Aanya Anand</div>
+      <div class="testi-role">Social Media Marketing</div>
+    </div>
+    <div class="testi-card fi">
+      <div class="stars">★★★★★</div>
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/68c7c9df36759b3294749f13_Screenshot%202025-09-15%20at%201.39.52%20PM.png" alt="Ankita Lodha" class="testi-avatar" onerror="this.style.display='none'">
+      <p class="testi-text">Proud of earning money through the projects. It's a huge motivation to keep developing my skills every single day.</p>
+      <div class="testi-name">Ankita Lodha</div>
+      <div class="testi-role">Content Writing</div>
+    </div>
+    <div class="testi-card fi">
+      <div class="stars">★★★★★</div>
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a02d4ed532a8800c256e5e_Apoorva%20yagi.png" alt="Apoorva Tyagi" class="testi-avatar" onerror="this.style.display='none'">
+      <p class="testi-text">Funngro is a powerful platform for all teenagers out there. I get to apply my actual skills, work with real companies, and bring new ideas to the table.</p>
+      <div class="testi-name">Apoorva Tyagi</div>
+      <div class="testi-role">Social Media Marketing</div>
+    </div>
+    <div class="testi-card fi">
+      <div class="stars">★★★★★</div>
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/68c7d93e36759b32947b0b65_IMG_8279.jpg" alt="Pooja Jalori" class="testi-avatar" onerror="this.style.display='none'">
+      <p class="testi-text">Funngro helped me earn through skills I already had. I'm working with multiple companies doing what I genuinely enjoy — completely on my own terms.</p>
+      <div class="testi-name">Pooja Jalori</div>
+      <div class="testi-role">Social Media · Content Writing</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT & FOUNDERS -->
+<section id="about" class="about-bg">
+  <div class="about-layout">
+    <div class="about-text fi">
+      <div class="s-tag">About Funngro</div>
+      <h2 class="s-title">"It's fun<br>to grow."</h2>
+      <p>Funngro is built by educators, tech enthusiasts, IIM alumni, finance experts — and most importantly, by loving parents. We are thankful to the mentors who shaped our early lives, and Funngro is our effort to give back to the society.</p>
+      <p>We're on a mission to enable teenagers to become financially empowered and grow up to be responsible, capable citizens of India.</p>
+      <div class="about-mission">"Mission — Enable Smart Teenagers and Smart Companies to realize their full potentials."</div>
+    </div>
+    <div class="founders fi">
+      <h3 style="font-family:'Syne',sans-serif; font-size:12px; font-weight:700; color:var(--muted2); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px;">Meet the Founders</h3>
+      <div class="founder-card">
+        <div class="founder-avatar">👩</div>
+        <div>
+          <div class="founder-name">Payal Jain</div>
+          <div class="founder-role">CEO, Funngro</div>
+          <a href="https://www.linkedin.com/in/payal-jain-8780191" target="_blank" rel="noopener" class="founder-li">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-avatar">👨</div>
+        <div>
+          <div class="founder-name">Anik Jain</div>
+          <div class="founder-role">CGO, Funngro</div>
+          <a href="https://www.linkedin.com/in/anik-jain" target="_blank" rel="noopener" class="founder-li">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-layout">
+    <div>
+      <div class="fi">
+        <div class="s-tag">FAQ</div>
+        <h2 class="s-title">Questions<br>worth asking</h2>
+        <p class="s-sub">Part of being successful is asking the right questions and listening to the answers.</p>
+      </div>
+      <div class="faq-list fi">
+        <div class="faq-item open">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How can I start earning money?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Login or register on the Funngro app. Go to the Projects section and choose an easy project — a survey, registration task, or app install. Complete the steps correctly and submit your proof. Once approved, money is credited instantly to your Funngro Wallet. Withdraw directly to your bank account or UPI anytime.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Why should teens work during school?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Start early, gain independence, and learn while you earn. Most importantly, you get real world experience no classroom can replicate. Work on projects matching your interests and find your true passion before making a final career decision.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What kind of work can I do on Funngro?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Funngro has 12 project categories: Social Media, Video Creation, Website Design, Influencer Marketing, App Development, Campus Ambassador, Research & Survey, Data Entry, Voice Over, Content Writing, Graphic Design, and Testing. Register for the categories of your choice directly in the app.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How do I get paid?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Earnings are credited to your Funngro Wallet after your submitted project is approved. You can withdraw directly to your bank account or UPI. There is no minimum withdrawal threshold for most projects.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Is Funngro free to use?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">Yes — registering and using Funngro as a teenlancer is completely free. Download the app, create your profile, and start applying to projects with zero cost, zero subscription.</div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-right fi">
+      <div class="faq-cta-card">
+        <div style="font-size:44px; margin-bottom:16px;">🚀</div>
+        <h3>Still have questions?</h3>
+        <p>Check our full FAQ page or reach out to our team directly. We're here to help you get started on your first project.</p>
+        <a href="https://www.funngro.com/faq" class="btn-primary" style="display:flex; justify-content:center; width:100%; margin-bottom:12px;">View All FAQs →</a>
+        <a href="mailto:hello@funngro.com" class="btn-ghost" style="display:flex; justify-content:center; width:100%;">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="fi">
+    <h2>Your first rupee is<br>one project away.</h2>
+    <p>Download the app. It's free. Always.</p>
+    <div class="dl-row">
+      <a href="https://refer.funngro.com/refer/LM0SCU" class="dl-btn">
+        <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/638c80744c238bae49b47ff4_image%2027.png" alt="Google Play" onerror="this.style.display='none'">
+        <div><div class="dl-small">Get it on</div><div class="dl-big">Google Play</div></div>
+      </a>
+      <a href="https://refer.funngro.com/refer/LM0SCU" class="dl-btn">
+        <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/638c80746a8a27189ca05fb9_image%2029.png" alt="App Store" onerror="this.style.display='none'">
+        <div><div class="dl-small">Download on the</div><div class="dl-big">App Store</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-text">funngro</div>
+      <p>Enable Smart Teenagers and Smart Companies to realize their full potentials. It's fun to grow.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="https://www.funngro.com/teen">Teen</a></li>
+        <li><a href="https://www.funngro.com/company">Company</a></li>
+        <li><a href="https://www.funngro.com/shelancer">Shelancer</a></li>
+        <li><a href="https://portal.funngro.com/">Login</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://www.funngro.com/blog">Blog</a></li>
+        <li><a href="https://www.funngro.com/faq">FAQs</a></li>
+        <li><a href="https://www.funngro.com/careers">Careers</a></li>
+        <li><a href="https://www.funngro.com/investors">Investors</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="https://www.funngro.com/privacy-policy">Privacy Policy</a></li>
+        <li><a href="https://www.funngro.com/terms-and-conditions">Terms & Conditions</a></li>
+        <li><a href="https://www.funngro.com/contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Funngro — Wishbanc Technologies Private Limited. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/funngro/" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/company/funngro" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll behaviour
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+// Logo fallback
+const navImg = document.getElementById('nav-img');
+navImg.onerror = () => { navImg.style.display='none'; document.getElementById('nav-fallback').style.display='inline'; };
+
+// Scroll fade-in
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+// FAQ accordion
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
