@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funngro – Smart Teens work with Smart Companies</title>
+<meta name="description" content="As seen on Shark Tank India. Funngro connects 50 lakh talented teenlancers with 4,000+ companies. Learn, earn, and grow — before you turn 18.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #00D084;
+  --green-dim: rgba(0,208,132,0.10);
+  --green-border: rgba(0,208,132,0.18);
+  --bg: #050F0A;
+  --surface: #0C1A10;
+  --card: #0F1E14;
+  --border: #172218;
+  --border2: #1E2E22;
+  --text: #E8F5ED;
+  --muted: #6B8A72;
+  --muted2: #4A6452;
+  --white: #FFFFFF;
+  --gold: #F5C842;
+  --gold-dim: rgba(245,200,66,0.10);
+  --gold-border: rgba(245,200,66,0.20);
+  --purple: #9B6DFF;
+  --purple-dim: rgba(155,109,255,0.10);
+  --purple-border: rgba(155,109,255,0.20);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── TICKER ── */
+.ticker-wrap { background: var(--green); overflow: hidden; padding: 10px 0; white-space: nowrap; position: relative; z-index: 300; }
+.ticker-track { display: inline-flex; animation: tick 45s linear infinite; }
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #000; padding: 0 28px; letter-spacing: 0.2px; }
+.t-dot { width: 5px; height: 5px; background: rgba(0,0,0,0.28); border-radius: 50%; flex-shrink: 0; }
+@keyframes tick { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 36px; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 64px;
+  background: rgba(5,15,10,0.88); backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border); transition: top 0.3s;
+}
+nav.scrolled { top: 0; }
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo img { height: 30px; }
+.nav-logo-fb { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--green); display: none; }
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--green) !important; color: #000 !important; padding: 9px 20px !important; border-radius: 100px; font-weight: 700 !important; font-size: 13px !important; }
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── SHARED ── */
+section { padding: 100px 5%; }
+.s-tag { font-size: 11px; color: var(--green); text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; margin-bottom: 14px; }
+.s-title { font-family: 'Syne', sans-serif; font-size: clamp(30px, 3.2vw, 48px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.06; margin-bottom: 14px; color: var(--white); }
+.s-sub { font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; font-weight: 300; }
+.btn-primary { background: var(--green); color: #000; padding: 13px 28px; border-radius: 100px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,208,132,0.28); }
+.btn-ghost { color: var(--text); padding: 13px 22px; border-radius: 100px; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border2); transition: border-color 0.2s, background 0.2s; font-weight: 500; }
+.btn-ghost:hover { border-color: var(--muted2); background: var(--surface); }
+.fi { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fi.visible { opacity: 1; transform: translateY(0); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 160px 5% 80px;
+  position: relative; overflow: hidden;
+}
+.hero-glow-1 { position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; background: radial-gradient(circle, rgba(0,208,132,0.09) 0%, transparent 60%); pointer-events: none; }
+.hero-glow-2 { position: absolute; bottom: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(155,109,255,0.05) 0%, transparent 65%); pointer-events: none; }
+.hero-glow-3 { position: absolute; bottom: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(245,200,66,0.04) 0%, transparent 65%); pointer-events: none; }
+
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid var(--green-border); padding: 7px 16px; border-radius: 100px; font-size: 12px; font-weight: 600; color: var(--green); margin-bottom: 28px; letter-spacing: 0.3px; }
+.badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: gpulse 2s infinite; flex-shrink: 0; }
+@keyframes gpulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,208,132,0.4)}50%{box-shadow:0 0 0 5px rgba(0,208,132,0)} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(52px, 7vw, 100px);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -3.5px;
+  color: var(--white);
+  margin-bottom: 28px;
+  max-width: 900px;
+}
+.hero h1 .green { color: var(--green); }
+.hero h1 .dim { color: var(--muted); }
+.hero-sub { font-size: 18px; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 44px; font-weight: 300; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+
+/* AUDIENCE CARDS */
+.audience-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; max-width: 1000px; }
+
+.aud-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 22px;
+  padding: 32px 28px;
+  text-decoration: none;
+  display: flex; flex-direction: column;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  text-align: left;
+  position: relative; overflow: hidden;
+}
+.aud-card::before {
+  content: ''; position: absolute; inset: 0;
+  border-radius: 22px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.aud-card:hover { transform: translateY(-6px); }
+
+.aud-card.teen { border-color: var(--green-border); }
+.aud-card.teen::before { background: linear-gradient(135deg, rgba(0,208,132,0.06) 0%, transparent 60%); }
+.aud-card.teen:hover { border-color: var(--green); box-shadow: 0 20px 48px rgba(0,208,132,0.12); }
+.aud-card.teen::before { opacity: 1; }
+
+.aud-card.company { border-color: var(--gold-border); }
+.aud-card.company::before { background: linear-gradient(135deg, rgba(245,200,66,0.06) 0%, transparent 60%); opacity: 1; }
+.aud-card.company:hover { border-color: var(--gold); box-shadow: 0 20px 48px rgba(245,200,66,0.10); }
+
+.aud-card.shelancer { border-color: var(--purple-border); }
+.aud-card.shelancer::before { background: linear-gradient(135deg, rgba(155,109,255,0.06) 0%, transparent 60%); opacity: 1; }
+.aud-card.shelancer:hover { border-color: var(--purple); box-shadow: 0 20px 48px rgba(155,109,255,0.10); }
+
+.aud-icon-wrap {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 18px;
+  position: relative; z-index: 1;
+}
+.aud-card.teen .aud-icon-wrap { background: var(--green-dim); border: 1px solid var(--green-border); }
+.aud-card.company .aud-icon-wrap { background: var(--gold-dim); border: 1px solid var(--gold-border); }
+.aud-card.shelancer .aud-icon-wrap { background: var(--purple-dim); border: 1px solid var(--purple-border); }
+
+.aud-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; position: relative; z-index: 1; }
+.aud-card.teen .aud-eyebrow { color: var(--green); }
+.aud-card.company .aud-eyebrow { color: var(--gold); }
+.aud-card.shelancer .aud-eyebrow { color: var(--purple); }
+
+.aud-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 10px; position: relative; z-index: 1; }
+.aud-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 22px; font-weight: 300; position: relative; z-index: 1; flex: 1; }
+.aud-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; font-family: 'Syne', sans-serif;
+  padding: 10px 18px; border-radius: 100px;
+  text-decoration: none; transition: opacity 0.2s;
+  position: relative; z-index: 1;
+  letter-spacing: -0.2px;
+}
+.aud-card.teen .aud-cta { background: var(--green); color: #000; }
+.aud-card.company .aud-cta { background: var(--gold); color: #000; }
+.aud-card.shelancer .aud-cta { background: var(--purple); color: #fff; }
+.aud-cta:hover { opacity: 0.85; }
+
+.aud-card .aud-arr { position: absolute; top: 24px; right: 24px; font-size: 20px; opacity: 0; transform: translate(-4px, 4px); transition: opacity 0.25s, transform 0.25s; z-index: 1; }
+.aud-card.teen .aud-arr { color: var(--green); }
+.aud-card.company .aud-arr { color: var(--gold); }
+.aud-card.shelancer .aud-arr { color: var(--purple); }
+.aud-card:hover .aud-arr { opacity: 1; transform: translate(0,0); }
+
+/* ── STATS ── */
+.stats-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 44px 5%; }
+.stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 860px; margin: 0 auto; text-align: center; }
+.stat-n { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: var(--green); letter-spacing: -2px; line-height: 1; }
+.stat-l { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+/* ── ABOUT PLATFORM ── */
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-text p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+.about-mission { background: var(--green-dim); border: 1px solid var(--green-border); border-radius: 12px; padding: 18px 22px; font-size: 14px; color: var(--green); font-weight: 600; font-style: italic; line-height: 1.6; margin-top: 8px; }
+.about-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+
+.about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.abt-metric {
+  background: var(--card); border: 1px solid var(--border2);
+  border-radius: 16px; padding: 22px 20px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.abt-metric:hover { border-color: var(--green-border); transform: translateY(-3px); }
+.abt-metric-n { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: var(--green); letter-spacing: -1.5px; line-height: 1; }
+.abt-metric-l { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+.abt-metric.wide { grid-column: 1 / -1; display: flex; gap: 16px; align-items: center; }
+.abt-metric.wide .abt-m-icon { font-size: 32px; }
+.abt-metric.wide .abt-m-text h4 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); letter-spacing: -0.3px; }
+.abt-metric.wide .abt-m-text p { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+/* ── HOW IT WORKS — 3 tracks ── */
+.how-bg { background: var(--surface); }
+.tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
+.track-card {
+  background: var(--card); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 28px 24px;
+  transition: transform 0.25s, border-color 0.25s;
+  position: relative; overflow: hidden;
+}
+.track-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+.track-card:hover { transform: translateY(-4px); }
+.track-card:hover::after { transform: scaleX(1); }
+.track-card.teen:hover { border-color: var(--green-border); }
+.track-card.teen::after { background: var(--green); }
+.track-card.company:hover { border-color: var(--gold-border); }
+.track-card.company::after { background: var(--gold); }
+.track-card.shelancer:hover { border-color: var(--purple-border); }
+.track-card.shelancer::after { background: var(--purple); }
+
+.track-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 20px; padding: 5px 12px; border-radius: 100px; display: inline-block;
+}
+.track-card.teen .track-label { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.track-card.company .track-label { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+.track-card.shelancer .track-label { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border); }
+
+.track-steps { display: flex; flex-direction: column; gap: 0; }
+.track-step { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border); }
+.track-step:last-child { border-bottom: none; }
+.track-step-n {
+  font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 800;
+  width: 26px; height: 26px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.track-card.teen .track-step-n { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.track-card.company .track-step-n { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+.track-card.shelancer .track-step-n { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border); }
+.track-step-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.track-step-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+.track-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 20px; font-size: 13px; font-weight: 700;
+  font-family: 'Syne', sans-serif; text-decoration: none;
+  border-radius: 100px; padding: 9px 18px;
+  transition: opacity 0.2s;
+}
+.track-card.teen .track-link { background: var(--green); color: #000; }
+.track-card.company .track-link { background: var(--gold); color: #000; }
+.track-card.shelancer .track-link { background: var(--purple); color: #fff; }
+.track-link:hover { opacity: 0.85; }
+
+/* ── SHARK TANK ── */
+.shark-section { text-align: center; }
+.shark-badge-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+.shark-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold-dim); border: 1px solid var(--gold-border);
+  padding: 8px 18px; border-radius: 100px;
+  font-size: 13px; color: var(--gold); font-weight: 600;
+}
+.shark-badge .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: gpulse2 2s infinite; }
+@keyframes gpulse2 { 0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,0.4)}50%{box-shadow:0 0 0 5px rgba(245,200,66,0)} }
+
+.shark-imgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+.shark-img-card {
+  background: var(--card); border: 1px solid var(--border2);
+  border-radius: 18px; overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s;
+  aspect-ratio: 16/10;
+}
+.shark-img-card:hover { transform: translateY(-4px); border-color: var(--gold-border); }
+.shark-img-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.25s; }
+.shark-img-card:hover img { opacity: 1; }
+
+/* ── LOGOS ── */
+.logos-bg { background: var(--surface); }
+.trust-label { font-size: 11px; color: var(--muted2); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 14px; margin-top: 28px; }
+.logos-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 20px 24px; background: var(--card); border: 1px solid var(--border2); border-radius: 14px; }
+.logos-row img { height: 26px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.48); transition: filter 0.2s; }
+.logos-row img:hover { filter: brightness(0) invert(1) opacity(0.9); }
+
+/* ── FEATURED IN ── */
+.press-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 20px 24px; background: var(--card); border: 1px solid var(--border2); border-radius: 14px; margin-top: 16px; }
+.press-row img { height: 22px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.45); transition: filter 0.2s; }
+.press-row img:hover { filter: brightness(0) invert(1) opacity(0.85); }
+
+/* ── FOUNDERS ── */
+.founders-section { background: var(--surface); }
+.founders-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.founders-text p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+.founders-cards { display: flex; flex-direction: column; gap: 14px; }
+.founder-card {
+  display: flex; gap: 18px; align-items: center;
+  background: var(--card); border: 1px solid var(--border2);
+  border-radius: 16px; padding: 22px 24px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.founder-card:hover { border-color: var(--green-border); transform: translateX(4px); }
+.founder-av { width: 54px; height: 54px; border-radius: 50%; background: var(--green-dim); border: 2px solid var(--green-border); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.founder-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--white); letter-spacing: -0.3px; }
+.founder-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.founder-li { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--green); font-weight: 600; text-decoration: none; border: 1px solid var(--green-border); padding: 4px 12px; border-radius: 100px; transition: opacity 0.2s; }
+.founder-li:hover { opacity: 0.75; }
+
+/* ── CTA ── */
+.cta-sec { text-align: center; position: relative; overflow: hidden; }
+.cta-sec::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,208,132,0.07) 0%, transparent 65%); pointer-events: none; }
+.cta-sec h2 { font-family: 'Syne', sans-serif; font-size: clamp(36px, 4.5vw, 64px); font-weight: 800; letter-spacing: -2.5px; line-height: 1.0; margin-bottom: 18px; color: var(--white); }
+.cta-sec p { color: var(--muted); font-size: 17px; margin-bottom: 40px; font-weight: 300; }
+.cta-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 800px; margin: 0 auto; }
+.cta-card {
+  padding: 20px; border-radius: 16px; text-decoration: none;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.cta-card:hover { transform: translateY(-3px); opacity: 0.88; }
+.cta-card.teen { background: var(--green); color: #000; }
+.cta-card.company { background: var(--gold); color: #000; }
+.cta-card.shelancer { background: var(--purple); color: #fff; }
+.cta-card span { font-size: 24px; }
+
+/* ── FOOTER ── */
+footer { background: #030A06; border-top: 1px solid var(--border); padding: 52px 5% 36px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+.footer-logo-text { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); }
+.footer-brand p { font-size: 13px; color: var(--muted); max-width: 260px; margin-top: 10px; line-height: 1.6; }
+.footer-col h4 { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted2); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border); padding-top: 24px; }
+.footer-copy { font-size: 12px; color: var(--muted2); }
+.footer-social { display: flex; gap: 16px; }
+.footer-social a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--text); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .audience-cards, .tracks, .shark-imgs, .cta-cards { grid-template-columns: 1fr; }
+  .about-layout, .founders-layout { grid-template-columns: 1fr; gap: 48px; }
+  .about-visual { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+}
+@media (max-width: 560px) {
+  .about-visual { grid-template-columns: 1fr; }
+  .abt-metric.wide { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="t-dot"></span>As seen on Shark Tank India — trusted by 50L+ youth across India</span>
+    <span class="ticker-item"><span class="t-dot"></span>4,000+ companies already hiring through Funngro</span>
+    <span class="ticker-item"><span class="t-dot"></span>Raunit built a website and earned ₹7,500 in 5 days</span>
+    <span class="ticker-item"><span class="t-dot"></span>Companies save up to 50% on project costs vs agencies</span>
+    <span class="ticker-item"><span class="t-dot"></span>Praanjal completed 10 projects in 3 months and earned ₹15,000</span>
+    <span class="ticker-item"><span class="t-dot"></span>Women earning financial independence through Shelancer</span>
+    <span class="ticker-item"><span class="t-dot"></span>1,000+ live projects across 12 categories right now</span>
+    <span class="ticker-item"><span class="t-dot"></span>As seen on Shark Tank India — trusted by 50L+ youth across India</span>
+    <span class="ticker-item"><span class="t-dot"></span>4,000+ companies already hiring through Funngro</span>
+    <span class="ticker-item"><span class="t-dot"></span>Raunit built a website and earned ₹7,500 in 5 days</span>
+    <span class="ticker-item"><span class="t-dot"></span>Companies save up to 50% on project costs vs agencies</span>
+    <span class="ticker-item"><span class="t-dot"></span>Praanjal completed 10 projects in 3 months and earned ₹15,000</span>
+    <span class="ticker-item"><span class="t-dot"></span>Women earning financial independence through Shelancer</span>
+    <span class="ticker-item"><span class="t-dot"></span>1,000+ live projects across 12 categories right now</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/638c80735fd2fd0810a24fba_funngro-logo.svg" alt="Funngro" id="nav-img">
+    <span class="nav-logo-fb" id="nav-fb">funngro</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://www.funngro.com/teen">For Teens</a></li>
+    <li><a href="https://www.funngro.com/company">For Companies</a></li>
+    <li><a href="https://www.funngro.com/shelancer">Shelancer</a></li>
+    <li><a href="https://www.funngro.com/blog">Blog</a></li>
+    <li><a href="https://www.funngro.com/faq">FAQs</a></li>
+    <li><a href="https://refer.funngro.com/refer/LM0SCU" class="nav-cta">Earn Now →</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-glow-3"></div>
+
+  <div class="hero-badge fi"><span class="badge-dot"></span>As seen on Shark Tank India</div>
+
+  <h1 class="fi">
+    Smart teens.<br>
+    <span class="green">Smart companies.</span><br>
+    <span class="dim">One platform.</span>
+  </h1>
+
+  <p class="hero-sub fi">Funngro connects 50 lakh talented youth with 4,000+ companies across India — creating real earnings, real experience, and real growth for everyone.</p>
+
+  <div class="hero-actions fi">
+    <a href="https://refer.funngro.com/refer/LM0SCU" class="btn-primary">Start Earning Free →</a>
+    <a href="mailto:hello@funngro.com" class="btn-ghost">Hire Talent →</a>
+  </div>
+
+  <div class="audience-cards fi">
+    <!-- TEENLANCER -->
+    <a href="https://www.funngro.com/teen" class="aud-card teen">
+      <div class="aud-arr">↗</div>
+      <div class="aud-icon-wrap">🎓</div>
+      <div class="aud-eyebrow">Teenlancer</div>
+      <div class="aud-title">Earn before you graduate</div>
+      <p class="aud-desc">Work with real companies, earn real money, and build a portfolio — all before you turn 18. Join 50 lakh teens already on Funngro.</p>
+      <span class="aud-cta">Start Earning →</span>
+    </a>
+
+    <!-- COMPANY -->
+    <a href="https://www.funngro.com/company" class="aud-card company">
+      <div class="aud-arr">↗</div>
+      <div class="aud-icon-wrap">🏢</div>
+      <div class="aud-eyebrow">For Companies</div>
+      <div class="aud-title">Smart talent. Half the cost.</div>
+      <p class="aud-desc">Get projects done at up to 50% lower cost than agencies. Pre-vetted talent, fast delivery, zero fixed overheads. 4,000+ companies trust us.</p>
+      <span class="aud-cta">Hire Talent →</span>
+    </a>
+
+    <!-- SHELANCER -->
+    <a href="https://www.funngro.com/shelancer" class="aud-card shelancer">
+      <div class="aud-arr">↗</div>
+      <div class="aud-icon-wrap">💜</div>
+      <div class="aud-eyebrow">Shelancer</div>
+      <div class="aud-title">Financial independence for women</div>
+      <p class="aud-desc">Flexible work, real income, no experience required. Turn your skills into earnings — on your own schedule, from anywhere.</p>
+      <span class="aud-cta">Join Shelancer →</span>
+    </a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="fi"><div class="stat-n">50L+</div><div class="stat-l">Active Users</div></div>
+    <div class="fi"><div class="stat-n">4,000+</div><div class="stat-l">Partner Companies</div></div>
+    <div class="fi"><div class="stat-n">1,000+</div><div class="stat-l">Live Projects</div></div>
+    <div class="fi"><div class="stat-n">12</div><div class="stat-l">Skill Categories</div></div>
+  </div>
+</div>
+
+<!-- ABOUT THE PLATFORM -->
+<section>
+  <div class="about-layout">
+    <div class="about-text fi">
+      <div class="s-tag">About Funngro</div>
+      <h2 class="s-title">"It's fun<br>to grow."</h2>
+      <p>Funngro is built by educators, tech enthusiasts, IIM alumni, finance experts — and most importantly, by loving parents who believe in the potential of India's next generation.</p>
+      <p>We connect talented teenagers and women with companies that need fresh, cost-effective, digitally-native talent. Everyone wins — companies save money, individuals earn independence.</p>
+      <div class="about-mission">"Mission — Enable Smart Teenagers and Smart Companies to realize their full potentials."</div>
+      <div class="about-actions">
+        <a href="https://refer.funngro.com/refer/LM0SCU" class="btn-primary">Join as Teenlancer →</a>
+        <a href="mailto:hello@funngro.com" class="btn-ghost">Hire Talent</a>
+      </div>
+    </div>
+    <div class="about-visual fi">
+      <div class="abt-metric">
+        <div class="abt-metric-n">50%</div>
+        <div class="abt-metric-l">Average cost savings<br>for companies</div>
+      </div>
+      <div class="abt-metric">
+        <div class="abt-metric-n">3–5</div>
+        <div class="abt-metric-l">Days avg. project<br>turnaround time</div>
+      </div>
+      <div class="abt-metric">
+        <div class="abt-metric-n">12</div>
+        <div class="abt-metric-l">Project categories<br>available</div>
+      </div>
+      <div class="abt-metric">
+        <div class="abt-metric-n">₹0</div>
+        <div class="abt-metric-l">Cost to register<br>for teenlancers</div>
+      </div>
+      <div class="abt-metric wide">
+        <div class="abt-m-icon">🦈</div>
+        <div class="abt-m-text">
+          <h4>Loved by Sharks on Shark Tank India</h4>
+          <p>Lakhs of teens, hundreds of companies, and now the Sharks — all trust Funngro to deliver real value.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — 3 TRACKS -->
+<section class="how-bg">
+  <div class="fi" style="text-align: center; margin-bottom: 0;">
+    <div class="s-tag" style="justify-content: center; display: flex;">How it works</div>
+    <h2 class="s-title" style="text-align: center; margin: 0 auto 14px;">Pick your path.<br>Start in minutes.</h2>
+    <p class="s-sub" style="margin: 0 auto; text-align: center;">Whether you're a teen, a company, or a woman building independence — Funngro has a track for you.</p>
+  </div>
+  <div class="tracks">
+    <div class="track-card teen fi">
+      <div class="track-label">For Teenlancers</div>
+      <div class="track-steps">
+        <div class="track-step">
+          <div class="track-step-n">01</div>
+          <div class="track-step-text"><strong>Download & Register</strong>Free signup on the Funngro app. Under 2 minutes.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">02</div>
+          <div class="track-step-text"><strong>Build Your Profile</strong>Add skills, interests, and any past work to stand out.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">03</div>
+          <div class="track-step-text"><strong>Complete First Project</strong>Get verified, earn your first payment and certificate.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">04</div>
+          <div class="track-step-text"><strong>Apply & Earn</strong>Browse 1,000+ live projects and start earning consistently.</div>
+        </div>
+      </div>
+      <a href="https://refer.funngro.com/refer/LM0SCU" class="track-link">Start Earning Free →</a>
+    </div>
+
+    <div class="track-card company fi">
+      <div class="track-label">For Companies</div>
+      <div class="track-steps">
+        <div class="track-step">
+          <div class="track-step-n">01</div>
+          <div class="track-step-text"><strong>Register Your Company</strong>Quick onboarding, no lengthy forms.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">02</div>
+          <div class="track-step-text"><strong>Post a Project</strong>Add your brief and budget. Takes under 2 minutes.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">03</div>
+          <div class="track-step-text"><strong>Get Curated Applicants</strong>We shortlist the best fits from 50L+ teenlancers.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">04</div>
+          <div class="track-step-text"><strong>Approve & Pay</strong>Release payment only after you approve the work.</div>
+        </div>
+      </div>
+      <a href="mailto:hello@funngro.com" class="track-link">Hire Talent Now →</a>
+    </div>
+
+    <div class="track-card shelancer fi">
+      <div class="track-label">For Shelancers</div>
+      <div class="track-steps">
+        <div class="track-step">
+          <div class="track-step-n">01</div>
+          <div class="track-step-text"><strong>Register on App</strong>Join Funngro Shelancer and select your area of interest.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">02</div>
+          <div class="track-step-text"><strong>Complete Your Profile</strong>Showcase your skills and experience — no experience needed to start.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">03</div>
+          <div class="track-step-text"><strong>Finish First Project</strong>Get paid and build your verified track record.</div>
+        </div>
+        <div class="track-step">
+          <div class="track-step-n">04</div>
+          <div class="track-step-text"><strong>Grow Independently</strong>Earn on your own schedule, from anywhere in India.</div>
+        </div>
+      </div>
+      <a href="https://refer.funngro.com/sl/refer/LM0SCU" class="track-link">Join Shelancer →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SHARK TANK -->
+<section class="shark-section">
+  <div class="fi">
+    <div class="s-tag" style="justify-content:center; display:flex;">Shark Tank India</div>
+    <h2 class="s-title" style="text-align:center; margin: 0 auto 14px;">Loved by 50L+ users.<br>Now loved by the Sharks.</h2>
+    <p class="s-sub" style="text-align:center; margin: 0 auto 36px;">Funngro appeared on Shark Tank India and won the trust of investors who believe in India's next generation of earners.</p>
+  </div>
+  <div class="shark-badge-row fi">
+    <div class="shark-badge"><span class="dot"></span>Featured on Shark Tank India</div>
+    <div class="shark-badge"><span class="dot"></span>Trusted by 50L+ users</div>
+    <div class="shark-badge"><span class="dot"></span>4,000+ partner companies</div>
+  </div>
+  <div class="shark-imgs fi">
+    <div class="shark-img-card">
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63fdf3f03e4e4d213cda423f_Funngro%20-%20Shark%20Tank.png" alt="Funngro on Shark Tank India" onerror="this.style.opacity='0'">
+    </div>
+    <div class="shark-img-card">
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63fdf406cd40dff886664edb_Funngro%20-%20Shark%20Tank%202.png" alt="Funngro on Shark Tank India" onerror="this.style.opacity='0'">
+    </div>
+    <div class="shark-img-card">
+      <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63fdf416648a6375d0f9db21_Funngro%20-%20Shark%20Tank%203.png" alt="Funngro on Shark Tank India" onerror="this.style.opacity='0'">
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="logos-bg">
+  <div class="fi">
+    <div class="s-tag">Trusted by</div>
+    <h2 class="s-title">India's best companies<br>are already on board</h2>
+  </div>
+  <div class="trust-label fi">Partner Companies</div>
+  <div class="logos-row fi">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e0e2e5824e05e043b_CarDekho%20logo.png" alt="CarDekho">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e236fced422c7e558_StockPe%20Logo.png" alt="StockPe">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909fc56174a8505b2556_Enerzy%20Solar%20logo.png" alt="Enerzy Solar">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c231131a1e105d55f450_Mobigic%20logo.png" alt="Mobigic">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909f302d2432498d0a93_Tarakki%20logo.png" alt="Tarakki">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909fd142ea4d0d188166_LegacyNext%20logo.png" alt="LegacyNext">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e0ce0a8ef5285a045_MOnech%20logo.png" alt="Monech">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e0e05723157cb10f6_Eco%20365%20Logo.png" alt="Eco 365">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909ee1a3895ee3da471b_Grow%20Partner%20logo.png" alt="Grow Partner">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399909e4eeebe97628bde62_Two%2099%20Logo.png" alt="Two 99">
+  </div>
+  <div class="trust-label fi">Partners & Investors</div>
+  <div class="logos-row fi">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c1974420c03b964d4513_AIC%20Pinnacle%20logo.png" alt="AIC Pinnacle">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c1985da398a524766945_Qapita%20logo.png" alt="Qapita">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c197453e183c74317857_Headstart%20logo.png" alt="Headstart">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c1984af86db14b5e888c_AIC%20logo.png" alt="AIC">
+  </div>
+  <div class="trust-label fi">Featured In</div>
+  <div class="press-row fi">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a02a16a363596ec9c5eefb_Times%20of%20India%20logo.png" alt="Times of India">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c778e6c4c837fc2ef89c_Business%20News%20week%20new%20logo.png" alt="Business News Week">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c778a3f4b8074b9bf839_IBS%20Intelligence%20new%20logo.png" alt="IBS Intelligence">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a029286e97ee36926d7bbf_Entracker.png" alt="Entrackr">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/6399c7787f63ad6273e07ba9_The%20Daily%20Brunch%20new%20logo.png" alt="The Daily Brunch">
+    <img src="https://cdn.prod.website-files.com/638b48215fd2fd34538fa6bc/63a029eed4fdce11c2d34e80_FM%20live%20logo.png" alt="FM Live">
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="founders-section">
+  <div class="founders-layout">
+    <div class="founders-text fi">
+      <div class="s-tag">The team behind Funngro</div>
+      <h2 class="s-title">Built by people<br>who give back</h2>
+      <p>Funngro is built by educators, tech enthusiasts, IIM alumni, and finance experts — most importantly, by loving parents. We are thankful to those mentors who helped us early in our lives. Funngro is our effort to give back.</p>
+      <p>Our mission is to enable teenagers and women to become financially empowered and grow into responsible, capable citizens of India.</p>
+    </div>
+    <div class="founders-cards fi">
+      <div class="founder-card">
+        <div class="founder-av">👩</div>
+        <div>
+          <div class="founder-name">Payal Jain</div>
+          <div class="founder-role">CEO, Funngro</div>
+          <a href="https://www.linkedin.com/in/payal-jain-8780191" target="_blank" rel="noopener" class="founder-li">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-av">👨</div>
+        <div>
+          <div class="founder-name">Anik Jain</div>
+          <div class="founder-role">CGO, Funngro</div>
+          <a href="https://www.linkedin.com/in/anik-jain" target="_blank" rel="noopener" class="founder-li">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-sec">
+  <div class="fi">
+    <h2>Where do<br>you belong?</h2>
+    <p>Choose your path. Start in minutes. It's always free to join.</p>
+    <div class="cta-cards">
+      <a href="https://www.funngro.com/teen" class="cta-card teen">
+        <span>🎓</span>
+        I'm a Teenlancer<br>
+        <small style="font-size:11px; opacity:0.7; font-family:'Plus Jakarta Sans';">Earn before you graduate</small>
+      </a>
+      <a href="https://www.funngro.com/company" class="cta-card company">
+        <span>🏢</span>
+        I'm a Company<br>
+        <small style="font-size:11px; opacity:0.7; font-family:'Plus Jakarta Sans';">Hire smart talent cheaply</small>
+      </a>
+      <a href="https://www.funngro.com/shelancer" class="cta-card shelancer">
+        <span>💜</span>
+        I'm a Shelancer<br>
+        <small style="font-size:11px; opacity:0.7; font-family:'Plus Jakarta Sans';">Earn on my own terms</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-text">funngro</div>
+      <p>Enable Smart Teenagers and Smart Companies to realize their full potentials. It's fun to grow.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="https://www.funngro.com/teen">Teenlancer</a></li>
+        <li><a href="https://www.funngro.com/company">For Companies</a></li>
+        <li><a href="https://www.funngro.com/shelancer">Shelancer</a></li>
+        <li><a href="https://portal.funngro.com/">Login</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://www.funngro.com/blog">Blog</a></li>
+        <li><a href="https://www.funngro.com/faq">FAQs</a></li>
+        <li><a href="https://www.funngro.com/careers">Careers</a></li>
+        <li><a href="https://www.funngro.com/investors">Investors</a></li>
+        <li><a href="https://www.funngro.com/contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="https://www.funngro.com/privacy-policy">Privacy Policy</a></li>
+        <li><a href="https://www.funngro.com/terms-and-conditions">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Funngro — Wishbanc Technologies Private Limited. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/funngro/" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/company/funngro" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+// Logo fallback
+const ni = document.getElementById('nav-img');
+ni.onerror = () => { ni.style.display = 'none'; document.getElementById('nav-fb').style.display = 'inline'; };
+
+// Scroll fade-in
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 65);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
